@@ -50,7 +50,7 @@
       if (!recipe.name || !recipe.description) {
         console.warn(`Recipe is missing name or description: ${recipe}`);
         return null;
-      }
+      }//displays recipe name and description
       return (
         <div key={recipe.id}>
           <h2>{recipe.name}</h2>
