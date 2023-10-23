@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import './Card.module.css';
+import styles from './Card.module.css';
 
 const Card = () => {
         //create state variables with default values
@@ -45,14 +45,14 @@ const Card = () => {
   if (error) return <div>Error: {error.message}</div>;
   if (data.length === 0) return <div>No data available</div>;
   return (
-    <div>
+    <div >
    {data.map((recipe) => {
       if (!recipe.name || !recipe.description) {
         console.warn(`Recipe is missing name or description: ${recipe}`);
         return null;
       }//displays recipe name and description
       return (
-        <div key={recipe.id}>
+        <div className={styles.cards} key={recipe.id}>
           <h2>{recipe.name}</h2>
           <p>{recipe.description}</p>
         </div>
