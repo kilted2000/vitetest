@@ -3,12 +3,10 @@ import './App.css';
 import styles from './Card.module.css';
 
 const Card = () => {
-        //create state variables with default values
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //useEffect hook to fetch data from API
   useEffect(() => {
     const fetchData = async () => {
       const url = 'https://tasty.p.rapidapi.com/recipes/list?from=0&size=3&q=chicken%20soup';
@@ -20,7 +18,7 @@ const Card = () => {
           'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
         },
       };
-//error handling
+
       try {
         const response = await fetch(url, options);
         if (!response.ok) {
@@ -28,7 +26,6 @@ const Card = () => {
         }
         const data = await response.json();
         console.log(data);
-        //set data to data.results
         setData(data.results);
         setIsLoading(false);
       } catch (error) {
@@ -36,7 +33,7 @@ const Card = () => {
         setIsLoading(false);
       }
     };
-//call fetchData function
+
     fetchData();
   }, []);
   
@@ -44,17 +41,27 @@ const Card = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (data.length === 0) return <div>No data available</div>;
+
+ 
+
   return (
     <div >
    {data.map((recipe) => {
+     
       if (!recipe.name || !recipe.description) {
         console.warn(`Recipe is missing name or description: ${recipe}`);
         return null;
-      }//displays recipe name and description
+      }
       return (
-        <div className={styles.cards} key={recipe.id}>
+        <div className={styles.cards}  style={{
+          backgroundImage: `url(${recipe.thumbnail_url})`,
+          height: '334px',
+          width: '242px',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }} key={recipe.id}>
           <h2>{recipe.name}</h2>
-          <p>{recipe.description}</p>
+          {/* <p>{recipe.description}</p> */}
         </div>
       );
     })}

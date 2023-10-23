@@ -4,4 +4,11 @@
     background-color: #eefee9;
     color: black;
     border-radius: 5%;
+   
+}
+
+img{
+    height: 245px;
+    width: 240px;
+    border-radius: 5%; 
 }
